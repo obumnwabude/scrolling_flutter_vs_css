@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nested Scrolling | Scrolling Insights</title>
+    <link rel="stylesheet" href="all.css" />
+    <style>
+      .outer {
+        background-color: blue;
+        margin-bottom: 2rem;
+        padding: 2rem;
+      }
+
+      .inner {
+        background-color: red;
+      }
+
+      .vertical {
+        width: min(80%, 512px);
+      }
+
+      .horizontal {
+        overflow-x: auto; /* overflow: auto; */
+      }
+
+      .outer.vertical {
+        height: 150vh;
+        overflow-y: auto; /* overflow: auto; */
+      }
+
+      .inner.vertical {
+        height: 300vh;
+      }
+
+      .outer.horizontal {
+        height: 40vh;
+        width: 150vw;
+      }
+
+      .inner.horizontal {
+        height: 60%;
+        width: 300vw;
+      }
+    </style>
+  </head>
+  <body>
+    <header><h1>Nested Scrolling</h1></header>
+    <main>
+      <p>overflow-x: auto;<br />overflow-y: auto;</p>
+      <div class="outer vertical"><div class="inner vertical"></div></div>
+      <div class="outer horizontal"><div class="inner horizontal"></div></div>
+      <div class="outer vertical"><div class="inner horizontal"></div></div>
+      <div class="outer horizontal"><div class="inner vertical"></div></div>
+    </main>
+  </body>
+</html>

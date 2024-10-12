@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Occupy Free Space or Scroll | Scrolling Insights</title>
+    <link rel="stylesheet" href="all.css" />
+    <style>
+      .outer {
+        background-color: blue;
+        display: flex;
+        flex-direction: column;
+        height: 80vh;
+        padding: 2rem;
+        overflow: auto;
+        width: min(80%, 512px);
+      }
+
+      .outer div {
+        margin-bottom: 2rem;
+      }
+
+      .inner {
+        background-color: red;
+        min-height: 80px;
+      }
+
+      .filler {
+        background-color: green;
+        flex: 1;
+        min-height: 240px;
+      }
+    </style>
+  </head>
+  <body>
+    <header><h1>Occupy Free Space or Scroll</h1></header>
+    <main>
+      <p>(Same Techniques).</p>
+      <div class="outer">
+        <div class="inner"></div>
+        <div class="filler"></div>
+        <div class="inner"></div>
+      </div>
+    </main>
+  </body>
+</html>

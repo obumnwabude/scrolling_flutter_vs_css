@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pin Item Scroll | Scrolling Insights</title>
+    <link rel="stylesheet" href="all.css" />
+    <style>
+      .outer {
+        background-color: blue;
+        height: 80vh;
+        padding: 2rem;
+        position: relative;
+        overflow: auto;
+        width: min(80%, 512px);
+      }
+
+      .outer div {
+        margin-bottom: 2rem;
+      }
+
+      .inner {
+        background-color: red;
+        height: 100%;
+      }
+
+      .pinned {
+        background-color: green;
+        height: 40%;
+        position: sticky;
+        top: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <header><h1>Pin Item Scroll</h1></header>
+    <main>
+      <p>position: relative;<br />position: sticky;</p>
+      <div class="outer">
+        <div class="inner"></div>
+        <div class="pinned"></div>
+        <div class="inner"></div>
+      </div>
+    </main>
+  </body>
+</html>

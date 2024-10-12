@@ -8,8 +8,6 @@ In this session, we will simultaneously look at how to achieve the following scr
 * How to achieve nested scrolling (slivers and shrinkWrap)
 * How to pin some items when you scroll (combining slivers)
 * How to occupy free space while allowing scrolling too (SliverFillRemaining)
-* How to control scrolling speed
-* How to scroll to a particular UI element
-* How to prevent the user from scrolling (overflow: hidden || pointer-events: none)
+* How to prevent the user from scrolling (NOT using Scrollable widgets)
 
 [View the Slides for this Session Here.](https://docs.google.com/presentation/d/1YtwNHfJP2ZoL4r8W_dU6FWsPlp2jPL2ko3sQ04p_gpU/edit?usp=sharing)
