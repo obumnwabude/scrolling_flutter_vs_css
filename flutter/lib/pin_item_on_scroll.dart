@@ -27,19 +27,29 @@ class PinItemOnScroll extends StatelessWidget {
               margin: const EdgeInsets.only(bottom: 32),
             ),
           ),
-          SliverAppBar(
-            automaticallyImplyLeading: false,
-            backgroundColor: Colors.green,
-            pinned: true,
-            expandedHeight: 180,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8),
+          PinnedHeaderSliver(
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(16),
+                color: Colors.green,
+              ),
+              height: 180,
+              margin: const EdgeInsets.only(bottom: 32),
             ),
-            toolbarHeight: 180,
-            // flexibleSpace: FlexibleSpaceBar(
-            //   title: const Text('Pin Item on Scroll'),
-            // ),
           ),
+          // SliverAppBar(
+          //   automaticallyImplyLeading: false,
+          //   backgroundColor: Colors.green,
+          //   pinned: true,
+          //   expandedHeight: 180,
+          //   shape: RoundedRectangleBorder(
+          //     borderRadius: BorderRadius.circular(8),
+          //   ),
+          //   toolbarHeight: 180,
+          //   // flexibleSpace: FlexibleSpaceBar(
+          //   //   title: const Text('Pin Item on Scroll'),
+          //   // ),
+          // ),
           SliverToBoxAdapter(
             child: Container(
               decoration: BoxDecoration(
@@ -47,7 +57,7 @@ class PinItemOnScroll extends StatelessWidget {
                 color: Colors.red,
               ),
               height: MediaQuery.sizeOf(context).height,
-              margin: const EdgeInsets.only(top: 64, bottom: 32),
+              margin: const EdgeInsets.only(bottom: 32),
             ),
           ),
         ]),
