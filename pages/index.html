@@ -1,0 +1,104 @@
+<!doctype html>
+<!--
+  The landing page of the deployed site (see scripts/deploy-pages.sh). It
+  links to the CSS demos and the Flutter web app, which the script puts in
+  the css/ and flutter/ folders next to this page.
+-->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Scrolling Insights: Flutter vs CSS</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        align-items: center;
+        background-color: #f8f9fa;
+        display: flex;
+        font-family: Arial, sans-serif;
+        justify-content: center;
+        min-height: 100vh;
+        padding: 1.5rem;
+      }
+
+      main {
+        max-width: 720px;
+        text-align: center;
+      }
+
+      h1 {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+      }
+
+      p {
+        line-height: 1.5;
+        margin-bottom: 2rem;
+      }
+
+      .choices {
+        display: grid;
+        gap: 16px;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        margin-bottom: 2rem;
+      }
+
+      .choices a {
+        background-color: white;
+        border: 2px solid var(--color);
+        border-radius: 12px;
+        color: unset;
+        padding: 1.5rem;
+        text-decoration: none;
+        transition: box-shadow 150ms;
+      }
+
+      .choices a:hover,
+      .choices a:focus-visible {
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      }
+
+      .choices strong {
+        color: var(--color);
+        display: block;
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .css {
+        --color: #1e88e5;
+      }
+
+      .flutter {
+        --color: #02569b;
+      }
+
+      .more a {
+        color: unset;
+        margin: 0 0.5rem;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Scrolling Insights: Flutter vs CSS</h1>
+      <p>
+        17 scrolling behaviors, built twice: once with HTML and CSS, and once with Flutter. Open both side by side, and
+        compare how each platform scrolls.
+      </p>
+      <div class="choices">
+        <a class="css" href="css/"><strong>CSS</strong>HTML and CSS, in your browser</a>
+        <a class="flutter" href="flutter/"><strong>Flutter</strong>The Flutter app, built for the web</a>
+      </div>
+      <p class="more">
+        <a href="https://github.com/obumnwabude/scrolling_flutter_vs_css">Source code</a>
+        <a href="https://github.com/obumnwabude/scrolling_flutter_vs_css/releases/latest">Android app (APK)</a>
+      </p>
+    </main>
+  </body>
+</html>

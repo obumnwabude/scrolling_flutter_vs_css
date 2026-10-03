@@ -1,0 +1,11 @@
+# CSS tests (see css/package.json)
+node_modules/
+package-lock.json
+test-results/
+playwright-report/
+
+# Android Studio / IntelliJ project settings, except the shared run
+# configurations (see .idea/runConfigurations).
+.idea/*
+!.idea/runConfigurations/
+*.iml

@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>6. Sticky Section Headers | Scrolling Insights</title>
+    <link rel="stylesheet" href="all.css" />
+    <style>
+      /*
+        Section headers that stick to the top while their section is on screen,
+        then get pushed away by the next one. Think of the letters in a contacts
+        list.
+
+        Every header is sticky. A sticky element never leaves its parent, so each
+        header lets go when its <section> scrolls away. That's all it takes.
+
+        In Flutter: a PinnedHeaderSliver inside a SliverMainAxisGroup per section.
+        The group plays the role of the parent <section>.
+      */
+
+      .scroller {
+        height: 70vh;
+        overflow-y: auto;
+      }
+
+      section .stack {
+        padding: 12px 0;
+      }
+
+      /* A sticky element never leaves its parent, so each header lets go
+         when its section scrolls away. */
+      section h3 {
+        height: 48px;
+        position: sticky;
+        top: 0;
+      }
+    </style>
+  </head>
+  <body class="layout">
+    <header>
+      <a class="back" href="index.html" aria-label="All demos" title="All demos"
+        ><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+          <path fill="currentColor" d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" /></svg
+      ></a>
+      <h1><span class="number">6</span><span class="title">Sticky Section Headers</span></h1>
+    </header>
+    <main>
+      <p>position: sticky; (one per section)</p>
+      <div class="scroller">
+        <section>
+          <h3 class="block highlight">Section A</h3>
+          <div class="stack" data-fill="6" data-label="A"></div>
+        </section>
+        <section>
+          <h3 class="block highlight">Section B</h3>
+          <div class="stack" data-fill="6" data-label="B"></div>
+        </section>
+        <section>
+          <h3 class="block highlight">Section C</h3>
+          <div class="stack" data-fill="6" data-label="C"></div>
+        </section>
+        <section>
+          <h3 class="block highlight">Section D</h3>
+          <div class="stack" data-fill="6" data-label="D"></div>
+        </section>
+        <section>
+          <h3 class="block highlight">Section E</h3>
+          <div class="stack" data-fill="6" data-label="E"></div>
+        </section>
+      </div>
+    </main>
+    <!-- Floating buttons to the previous demo, all demos, and the next demo. -->
+    <nav class="demo-nav" aria-label="Demos">
+      <a href="pin-item-on-scroll.html" aria-label="Previous: Pin Item on Scroll" title="Previous: Pin Item on Scroll"
+        ><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+          <path fill="currentColor" d="M15.41 7.41 14 6l-6 6 6 6 1.41-1.41L10.83 12z" /></svg
+      ></a>
+      <a href="index.html" aria-label="All demos" title="All demos"
+        ><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+          <path
+            fill="currentColor"
+            d="M4 8h4V4H4v4zm6 12h4v-4h-4v4zm-6 0h4v-4H4v4zm0-6h4v-4H4v4zm6 0h4v-4h-4v4zm6-10v4h4V4h-4zm-6 4h4V4h-4v4zm6 6h4v-4h-4v4zm0 6h4v-4h-4v4z"
+          /></svg
+      ></a>
+      <a
+        href="occupy-free-space-or-scroll.html"
+        aria-label="Next: Occupy Free Space or Scroll"
+        title="Next: Occupy Free Space or Scroll"
+        ><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+          <path fill="currentColor" d="M10 6 8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" /></svg
+      ></a>
+    </nav>
+    <script src="fill.js"></script>
+  </body>
+</html>

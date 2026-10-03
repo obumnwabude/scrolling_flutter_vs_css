@@ -1,57 +1,85 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Nested Scrolling | Scrolling Insights</title>
+    <title>4. Nested Scrolling | Scrolling Insights</title>
     <link rel="stylesheet" href="all.css" />
     <style>
-      .outer {
-        background-color: blue;
-        margin-bottom: 2rem;
-        padding: 2rem;
+      /*
+        Scrollable boxes inside a scrollable page.
+
+        A box only scrolls if two things are true: it has a size in the scroll
+        direction (a height to scroll vertically, a width to scroll horizontally),
+        and an `overflow` of `auto` or `scroll`. Without them, it grows to fit its
+        content, and the page scrolls instead.
+
+        In Flutter, the same rule is strict: a scrollable inside a scrollable
+        without a bounded size throws an "unbounded height" error. You give it a
+        height, use `shrinkWrap: true`, or use slivers.
+      */
+
+      /* Vertical in vertical: a fixed height and overflow-y. */
+      .same-direction {
+        height: 280px;
+        overflow-y: auto;
       }
 
-      .inner {
-        background-color: red;
+      /* Horizontal in vertical: a row with overflow-x. */
+      .opposite-direction {
+        display: flex;
+        gap: 12px;
+        height: 120px;
+        overflow-x: auto;
       }
 
-      .vertical {
-        width: min(80%, 512px);
+      .opposite-direction > div {
+        flex: 0 0 120px;
       }
 
-      .horizontal {
-        overflow-x: auto; /* overflow: auto; */
-      }
-
-      .outer.vertical {
-        height: 150vh;
-        overflow-y: auto; /* overflow: auto; */
-      }
-
-      .inner.vertical {
-        height: 300vh;
-      }
-
-      .outer.horizontal {
-        height: 40vh;
-        width: 150vw;
-      }
-
-      .inner.horizontal {
-        height: 60%;
-        width: 300vw;
+      /* No height and no overflow: the box grows to fit its content. */
+      .grows {
+        height: auto;
       }
     </style>
   </head>
-  <body>
-    <header><h1>Nested Scrolling</h1></header>
+  <body class="basics">
+    <header>
+      <a class="back" href="index.html" aria-label="All demos" title="All demos"
+        ><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+          <path fill="currentColor" d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" /></svg
+      ></a>
+      <h1><span class="number">4</span><span class="title">Nested Scrolling</span></h1>
+    </header>
     <main>
-      <p>overflow-x: auto;<br />overflow-y: auto;</p>
-      <div class="outer vertical"><div class="inner vertical"></div></div>
-      <div class="outer horizontal"><div class="inner horizontal"></div></div>
-      <div class="outer vertical"><div class="inner horizontal"></div></div>
-      <div class="outer horizontal"><div class="inner vertical"></div></div>
+      <p>height + overflow: auto;</p>
+      <h2>Vertical in vertical (fixed height)</h2>
+      <div class="block container padded stack same-direction" data-fill="20" data-label="Inner "></div>
+
+      <h2>Horizontal in vertical (fixed height)</h2>
+      <div class="opposite-direction" data-fill="12"></div>
+
+      <h2>Grows with its content (the default)</h2>
+      <div class="block container padded stack grows" data-fill="8" data-label="Item "></div>
     </main>
+    <!-- Floating buttons to the previous demo, all demos, and the next demo. -->
+    <nav class="demo-nav" aria-label="Demos">
+      <a href="prevent-scroll.html" aria-label="Previous: Prevent Scroll" title="Previous: Prevent Scroll"
+        ><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+          <path fill="currentColor" d="M15.41 7.41 14 6l-6 6 6 6 1.41-1.41L10.83 12z" /></svg
+      ></a>
+      <a href="index.html" aria-label="All demos" title="All demos"
+        ><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+          <path
+            fill="currentColor"
+            d="M4 8h4V4H4v4zm6 12h4v-4h-4v4zm-6 0h4v-4H4v4zm0-6h4v-4H4v4zm6 0h4v-4h-4v4zm6-10v4h4V4h-4zm-6 4h4V4h-4v4zm6 6h4v-4h-4v4zm0 6h4v-4h-4v4z"
+          /></svg
+      ></a>
+      <a href="pin-item-on-scroll.html" aria-label="Next: Pin Item on Scroll" title="Next: Pin Item on Scroll"
+        ><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+          <path fill="currentColor" d="M10 6 8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" /></svg
+      ></a>
+    </nav>
+    <script src="fill.js"></script>
   </body>
 </html>

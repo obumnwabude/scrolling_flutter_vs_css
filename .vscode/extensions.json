@@ -1,0 +1,9 @@
+{
+  // VS Code suggests these when you open the repository.
+  "recommendations": [
+    // Runs, debugs, and tests the Flutter app.
+    "Dart-Code.flutter",
+    // Runs and debugs the CSS tests from the Testing view.
+    "ms-playwright.playwright"
+  ]
+}

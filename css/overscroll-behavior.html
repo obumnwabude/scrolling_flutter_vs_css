@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>11. Overscroll Behavior | Scrolling Insights</title>
+    <link rel="stylesheet" href="all.css" />
+    <style>
+      /*
+        What happens when you keep scrolling past the end of a box.
+
+        With `overscroll-behavior: auto` (the default), the page behind takes over
+        once a box reaches its end. That's scroll chaining. With `contain`, it
+        stops at the edge of the box, with no bounce and no pull-to-refresh.
+
+        In Flutter, scroll physics decide how the edge feels: BouncingScrollPhysics
+        springs back like iOS, ClampingScrollPhysics stops like Android. Flutter
+        doesn't chain finger drags between nested scrollables at all.
+      */
+
+      .inner {
+        height: 240px;
+        overflow-y: auto;
+      }
+
+      /* When this list hits its end, the page does not take over,
+         and the browser does not bounce or pull to refresh. */
+      .contain {
+        overscroll-behavior: contain;
+      }
+
+      .tail {
+        height: 100vh;
+        margin-top: 2rem;
+      }
+    </style>
+  </head>
+  <body class="feel">
+    <header>
+      <a class="back" href="index.html" aria-label="All demos" title="All demos"
+        ><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+          <path fill="currentColor" d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" /></svg
+      ></a>
+      <h1><span class="number">11</span><span class="title">Overscroll Behavior</span></h1>
+    </header>
+    <main>
+      <p>overscroll-behavior: auto | contain;</p>
+      <h2>auto (scrolling carries on to the page)</h2>
+      <div class="block container padded stack inner" data-fill="10"></div>
+
+      <h2>contain (scrolling stops at the edge)</h2>
+      <div class="block container padded stack inner contain" data-fill="10"></div>
+
+      <div class="block container tail"></div>
+    </main>
+    <!-- Floating buttons to the previous demo, all demos, and the next demo. -->
+    <nav class="demo-nav" aria-label="Demos">
+      <a href="scroll-snap.html" aria-label="Previous: Scroll Snap" title="Previous: Scroll Snap"
+        ><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+          <path fill="currentColor" d="M15.41 7.41 14 6l-6 6 6 6 1.41-1.41L10.83 12z" /></svg
+      ></a>
+      <a href="index.html" aria-label="All demos" title="All demos"
+        ><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+          <path
+            fill="currentColor"
+            d="M4 8h4V4H4v4zm6 12h4v-4h-4v4zm-6 0h4v-4H4v4zm0-6h4v-4H4v4zm6 0h4v-4h-4v4zm6-10v4h4V4h-4zm-6 4h4V4h-4v4zm6 6h4v-4h-4v4zm0 6h4v-4h-4v4z"
+          /></svg
+      ></a>
+      <a href="custom-scrollbar.html" aria-label="Next: Custom Scrollbar" title="Next: Custom Scrollbar"
+        ><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+          <path fill="currentColor" d="M10 6 8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" /></svg
+      ></a>
+    </nav>
+    <script src="fill.js"></script>
+  </body>
+</html>

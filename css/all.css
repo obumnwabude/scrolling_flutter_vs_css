@@ -1,3 +1,19 @@
+/*
+  Styles shared by every demo page.
+
+  Each demo is made of plain colored boxes, so that nothing distracts from
+  how the boxes scroll. The Flutter demos use the same colors and sizes (see
+  flutter/lib/common.dart), so you can put both versions side by side.
+*/
+
+/* Colors shared with the Flutter demos, so both sides look the same. */
+:root {
+  --container: #2196f3; /* Colors.blue */
+  --child: #f44336; /* Colors.red */
+  --highlight: #4caf50; /* Colors.green */
+  --header-height: 64px;
+}
+
 * {
   box-sizing: border-box;
   font-family: Arial, sans-serif;
@@ -9,28 +25,201 @@ body {
   padding-top: 0.2px; /* Fix the issue with fixed header */
 }
 
+/* The bar at the top of every page. It's fixed, so it never scrolls away,
+   like Flutter's AppBar. */
+
 header {
+  align-items: center;
   background-color: #f8f9fa;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  padding: 1rem;
+  display: flex;
+  gap: 1rem;
+  height: var(--header-height);
+  padding: 0 1rem;
   position: fixed;
-  text-align: center;
+  top: 0;
   width: 100%;
+  z-index: 10;
 }
 
 header h1 {
-  font-size: 2rem;
+  font-size: 1.5rem;
 }
 
+header a {
+  color: unset;
+  text-decoration: none;
+}
+
+/* The back arrow: a round, 40px button (the size Material uses for its back
+   button), which tints on hover like the floating buttons. */
+header .back {
+  align-items: center;
+  border-radius: 50%;
+  display: flex;
+  flex-shrink: 0;
+  height: 40px;
+  justify-content: center;
+  margin-left: -8px;
+  transition: background-color 150ms;
+  width: 40px;
+}
+
+header .back:hover,
+header .back:focus-visible {
+  background-color: var(--group-tint, #eee);
+}
+
+header h1 {
+  align-items: center;
+  display: flex;
+  gap: 0.75rem;
+}
+
+/* Leaves room for the fixed header, and centers the demo. */
 main {
-  margin-top: 64px;
-  padding: 3rem 1.5rem;
+  margin: var(--header-height) auto 0;
+  max-width: calc(512px + 3rem); /* Matches demoWidth in Flutter. */
+  padding: 1.5rem;
 }
 
-main p {
+/* The key CSS for each demo, shown above it. */
+main > p {
+  font-family: monospace;
   margin-bottom: 1.5rem;
 }
 
-main div {
+main h2 {
+  font-size: 1.1rem;
+  margin: 2rem 0 0.5rem;
+}
+
+/* A rounded, colored box. Every demo is built from these. */
+.block {
+  align-items: center;
   border-radius: 8px;
+  color: white;
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  background-color: var(--container);
+}
+
+.child {
+  background-color: var(--child);
+  min-height: 56px;
+}
+
+.highlight {
+  background-color: var(--highlight);
+}
+
+/* A vertical list of full-width blocks with gaps between them. */
+.stack {
+  align-items: stretch;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  justify-content: flex-start;
+}
+
+/* Padding inside a container, between its edge and its items. */
+.padded {
+  padding: 16px;
+}
+
+button {
+  border: 1px solid #888;
+  border-radius: 20px;
+  background: none;
+  cursor: pointer;
+  font-size: 0.9rem;
+  padding: 0.5rem 1rem;
+}
+
+/*
+  Navigation: group colors, numbers, and the floating demo buttons.
+  None of this is about scrolling. It just makes the demos easier to browse.
+*/
+
+/* Each group of demos has its own color. Pages set the group as a class on
+   <body>, and the index sets it on each <section>. */
+.basics {
+  --group: #1e88e5;
+  --group-tint: #e3f2fd;
+}
+
+.layout {
+  --group: #43a047;
+  --group-tint: #e8f5e9;
+}
+
+.feel {
+  --group: #fb8c00;
+  --group-tint: #fff3e0;
+}
+
+.control {
+  --group: #8e24aa;
+  --group-tint: #f3e5f5;
+}
+
+/* A demo's number, in a circle of its group's color. */
+.number {
+  align-items: center;
+  background-color: var(--group, #555);
+  border-radius: 50%;
+  color: white;
+  display: inline-flex;
+  flex-shrink: 0;
+  font-size: 0.9rem;
+  font-weight: bold;
+  height: 2rem;
+  justify-content: center;
+  width: 2rem;
+}
+
+/* Floating buttons at the bottom right of every demo: previous demo, all
+   demos, next demo. `position: fixed` keeps them in place while the page
+   scrolls, like a FloatingActionButton in Flutter. */
+.demo-nav {
+  background-color: white;
+  border: 2px solid var(--group, #555);
+  border-radius: 999px;
+  bottom: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  display: flex;
+  gap: 4px;
+  padding: 4px;
+  position: fixed;
+  right: 16px;
+  z-index: 20;
+}
+
+.demo-nav a {
+  align-items: center;
+  border-radius: 50%;
+  color: unset;
+  display: flex;
+  height: 40px;
+  justify-content: center;
+  text-decoration: none;
+  width: 40px;
+}
+
+.demo-nav a {
+  transition: background-color 150ms;
+}
+
+.demo-nav a:hover,
+.demo-nav a:focus-visible {
+  background-color: var(--group-tint, #eee);
+}
+
+/* No previous demo on the first page, and no next demo on the last. */
+.demo-nav a[aria-disabled='true'] {
+  opacity: 0.3;
+  pointer-events: none;
 }

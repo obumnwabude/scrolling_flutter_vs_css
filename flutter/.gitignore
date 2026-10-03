@@ -5,16 +5,21 @@
 *.swp
 .DS_Store
 .atom/
+.build/
 .buildlog/
 .history
 .svn/
+.swiftpm/
 migrate_working_dir/
 
 # IntelliJ related
 *.iml
 *.ipr
 *.iws
-.idea/
+# Ignore Android Studio's project settings, but keep the shared run
+# configurations, so the app and tests are ready to run after cloning.
+.idea/*
+!.idea/runConfigurations/
 
 # The .vscode folder contains launch configuration and tasks you configure in
 # VS Code which you may wish to be included in version control, so this line
@@ -42,7 +47,7 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 
-# All target platforms. For the sake of having only the dart code.  
+# All target platforms. For the sake of having only the dart code.
 android/
 ios/
 web/
@@ -51,6 +56,6 @@ linux/
 macos/
 
 # Other Flutter related files. For the sake of having only the dart code.
+# `flutter create .` generates them again (see README.md).
 .metadata
-analysis_options.yaml
 pubspec.lock

@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>14. Scroll Progress | Scrolling Insights</title>
+    <link rel="stylesheet" href="all.css" />
+    <style>
+      /*
+        A bar that fills up as you scroll, showing how far you've read.
+
+        `animation-timeline: scroll()` ties a normal CSS animation to the scroll
+        position of the nearest scrolling ancestor. At the top, the animation is at
+        0%. At the bottom, it's at 100%. No JavaScript.
+
+        In Flutter: a ScrollController and a ListenableBuilder that rebuilds a
+        LinearProgressIndicator on every scroll.
+      */
+
+      .scroller {
+        height: 70vh;
+        overflow-y: auto;
+      }
+
+      /* Grows from 0 to full width as the scroller goes from top to bottom.
+         Browsers without scroll-driven animations show no bar. */
+      .progress {
+        animation: grow linear both;
+        animation-timeline: scroll();
+        background-color: var(--highlight);
+        height: 8px;
+        position: sticky;
+        top: 0;
+        transform: scaleX(0);
+        transform-origin: left;
+      }
+
+      @keyframes grow {
+        to {
+          transform: scaleX(1);
+        }
+      }
+
+      .stack {
+        padding: 24px 0;
+      }
+    </style>
+  </head>
+  <body class="control">
+    <header>
+      <a class="back" href="index.html" aria-label="All demos" title="All demos"
+        ><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+          <path fill="currentColor" d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" /></svg
+      ></a>
+      <h1><span class="number">14</span><span class="title">Scroll Progress</span></h1>
+    </header>
+    <main>
+      <p>animation-timeline: scroll();</p>
+      <div class="scroller">
+        <div class="progress"></div>
+        <div class="stack" data-fill="40" data-label="Paragraph "></div>
+      </div>
+    </main>
+    <!-- Floating buttons to the previous demo, all demos, and the next demo. -->
+    <nav class="demo-nav" aria-label="Demos">
+      <a
+        href="scroll-programmatically.html"
+        aria-label="Previous: Scroll Programmatically"
+        title="Previous: Scroll Programmatically"
+        ><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+          <path fill="currentColor" d="M15.41 7.41 14 6l-6 6 6 6 1.41-1.41L10.83 12z" /></svg
+      ></a>
+      <a href="index.html" aria-label="All demos" title="All demos"
+        ><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+          <path
+            fill="currentColor"
+            d="M4 8h4V4H4v4zm6 12h4v-4h-4v4zm-6 0h4v-4H4v4zm0-6h4v-4H4v4zm6 0h4v-4h-4v4zm6-10v4h4V4h-4zm-6 4h4V4h-4v4zm6 6h4v-4h-4v4zm0 6h4v-4h-4v4z"
+          /></svg
+      ></a>
+      <a href="infinite-list.html" aria-label="Next: Infinite List" title="Next: Infinite List"
+        ><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+          <path fill="currentColor" d="M10 6 8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" /></svg
+      ></a>
+    </nav>
+    <script src="fill.js"></script>
+  </body>
+</html>

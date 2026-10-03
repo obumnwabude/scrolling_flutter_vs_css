@@ -1,0 +1,76 @@
+{
+  // Run and debug configurations for VS Code. Pick one in the Run and Debug
+  // view (Ctrl/Cmd + Shift + D), then press F5.
+  //
+  // The Flutter ones need the Flutter extension (Dart-Code.flutter). VS Code
+  // offers to install it when you open this folder (see extensions.json).
+  // Choose the device (phone, emulator, or Chrome) in the status bar.
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Flutter",
+      "type": "dart",
+      "request": "launch",
+      "cwd": "flutter",
+      "program": "lib/main.dart"
+    },
+    {
+      "name": "Flutter (profile mode)",
+      "type": "dart",
+      "request": "launch",
+      "cwd": "flutter",
+      "program": "lib/main.dart",
+      // Profile mode runs at release speed, but keeps DevTools. Use it to
+      // judge how smooth scrolling is. Debug mode is slower on purpose.
+      "flutterMode": "profile"
+    },
+    {
+      "name": "Flutter (release mode)",
+      "type": "dart",
+      "request": "launch",
+      "cwd": "flutter",
+      "program": "lib/main.dart",
+      "flutterMode": "release"
+    },
+    {
+      "name": "Flutter on Chrome",
+      "type": "dart",
+      "request": "launch",
+      "cwd": "flutter",
+      "program": "lib/main.dart",
+      "deviceId": "chrome"
+    },
+    {
+      "name": "Flutter tests",
+      "type": "dart",
+      "request": "launch",
+      "cwd": "flutter",
+      "program": "test/"
+    },
+    {
+      "name": "CSS demos in Chrome",
+      "type": "chrome",
+      "request": "launch",
+      // Opens the page straight from disk, like double-clicking it.
+      "file": "${workspaceFolder}/css/index.html"
+    },
+    {
+      "name": "CSS tests",
+      "type": "node-terminal",
+      "request": "launch",
+      "cwd": "${workspaceFolder}/css",
+      // Run `npm install` and `npx playwright install chromium` in the css
+      // folder once first.
+      "command": "npm test"
+    }
+  ],
+  "compounds": [
+    {
+      // Both versions of every demo in two Chrome windows, for comparing
+      // them side by side.
+      "name": "Flutter and CSS side by side",
+      "configurations": ["Flutter on Chrome", "CSS demos in Chrome"],
+      "stopAll": true
+    }
+  ]
+}

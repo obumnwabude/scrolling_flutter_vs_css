@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>17. Two-Dimensional Scroll | Scrolling Insights</title>
+    <link rel="stylesheet" href="all.css" />
+    <style>
+      /*
+        A grid larger than the screen in both directions, like a spreadsheet.
+
+        `overflow: auto` on one box scrolls it both ways at once, even diagonally
+        on a trackpad.
+
+        In Flutter, a scrollable moves along one axis, so the demo nests a
+        horizontal SingleChildScrollView inside a vertical one. For big grids,
+        TwoDimensionalScrollView (or TableView from the two_dimensional_scrollables
+        package) builds only the visible cells.
+      */
+
+      /* Wider than the page, so this one demo uses the full width. */
+      main {
+        max-width: none;
+      }
+
+      /* One box, scrolling both ways. */
+      .grid-scroller {
+        display: block;
+        height: 70vh;
+        overflow: auto;
+      }
+
+      /* 12 columns of 96px. max-content lets the grid be as wide as its
+         columns, instead of squeezing into the scroller's width. */
+      .grid {
+        display: grid;
+        gap: 8px;
+        grid-template-columns: repeat(12, 96px);
+        width: max-content;
+      }
+
+      .grid > div {
+        height: 48px;
+        min-height: 0;
+      }
+    </style>
+  </head>
+  <body class="control">
+    <header>
+      <a class="back" href="index.html" aria-label="All demos" title="All demos"
+        ><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+          <path fill="currentColor" d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" /></svg
+      ></a>
+      <h1><span class="number">17</span><span class="title">Two-Dimensional Scroll</span></h1>
+    </header>
+    <main>
+      <p>overflow: auto;</p>
+      <div class="block container padded grid-scroller">
+        <div class="grid"></div>
+      </div>
+    </main>
+    <!-- Floating buttons to the previous demo, all demos, and the next demo. -->
+    <nav class="demo-nav" aria-label="Demos">
+      <a href="pull-to-refresh.html" aria-label="Previous: Pull to Refresh" title="Previous: Pull to Refresh"
+        ><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+          <path fill="currentColor" d="M15.41 7.41 14 6l-6 6 6 6 1.41-1.41L10.83 12z" /></svg
+      ></a>
+      <a href="index.html" aria-label="All demos" title="All demos"
+        ><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+          <path
+            fill="currentColor"
+            d="M4 8h4V4H4v4zm6 12h4v-4h-4v4zm-6 0h4v-4H4v4zm0-6h4v-4H4v4zm6 0h4v-4h-4v4zm6-10v4h4V4h-4zm-6 4h4V4h-4v4zm6 6h4v-4h-4v4zm0 6h4v-4h-4v4z"
+          /></svg
+      ></a>
+      <a aria-disabled="true" aria-label="No next demo"
+        ><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+          <path fill="currentColor" d="M10 6 8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" /></svg
+      ></a>
+    </nav>
+    <script>
+      // Fill the grid with 30 rows × 12 columns of spreadsheet-style cells:
+      // A1, B1, ... L30. 65 is the character code of "A".
+      const grid = document.querySelector('.grid');
+      for (let row = 1; row <= 30; row++) {
+        for (let column = 0; column < 12; column++) {
+          const cell = document.createElement('div');
+          cell.className = 'block child';
+          cell.textContent = `${String.fromCharCode(65 + column)}${row}`;
+          grid.append(cell);
+        }
+      }
+    </script>
+  </body>
+</html>

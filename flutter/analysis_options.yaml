@@ -1,0 +1,13 @@
+include: package:flutter_lints/flutter.yaml
+
+analyzer:
+  exclude:
+    - build/**
+    - ios/build/**
+
+linter:
+  rules:
+    lines_longer_than_80_chars: false
+
+formatter:
+  page_width: 120

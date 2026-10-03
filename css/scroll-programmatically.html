@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>13. Scroll Programmatically | Scrolling Insights</title>
+    <link rel="stylesheet" href="all.css" />
+    <style>
+      /*
+        Scrolling from code: back to the top, down to the bottom, or to an item.
+        Think of a "back to top" button.
+
+        - `element.scrollTo({ top })` scrolls a box to an offset.
+        - `element.scrollIntoView()` scrolls every box around an element until it
+          is on screen.
+        - A link to `#item-25` does the same with no JavaScript at all.
+        - `scroll-behavior: smooth` animates all three.
+
+        In Flutter: ScrollController.animateTo and Scrollable.ensureVisible.
+      */
+
+      .scroller {
+        height: 60vh;
+        overflow-y: auto;
+        scroll-behavior: smooth; /* Also makes the #item-25 link smooth. */
+      }
+
+      .buttons {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-bottom: 16px;
+      }
+    </style>
+  </head>
+  <body class="control">
+    <header>
+      <a class="back" href="index.html" aria-label="All demos" title="All demos"
+        ><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+          <path fill="currentColor" d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" /></svg
+      ></a>
+      <h1><span class="number">13</span><span class="title">Scroll Programmatically</span></h1>
+    </header>
+    <main>
+      <p>scrollTo() / scrollIntoView() / scroll-behavior: smooth;</p>
+      <div class="buttons">
+        <button id="top">Top</button>
+        <button id="item">Item 25</button>
+        <button id="bottom">Bottom</button>
+        <a href="#item-25">Link to item 25 (no JS)</a>
+      </div>
+      <div class="scroller stack" data-fill="50" data-label="Item "></div>
+    </main>
+    <!-- Floating buttons to the previous demo, all demos, and the next demo. -->
+    <nav class="demo-nav" aria-label="Demos">
+      <a href="custom-scrollbar.html" aria-label="Previous: Custom Scrollbar" title="Previous: Custom Scrollbar"
+        ><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+          <path fill="currentColor" d="M15.41 7.41 14 6l-6 6 6 6 1.41-1.41L10.83 12z" /></svg
+      ></a>
+      <a href="index.html" aria-label="All demos" title="All demos"
+        ><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+          <path
+            fill="currentColor"
+            d="M4 8h4V4H4v4zm6 12h4v-4h-4v4zm-6 0h4v-4H4v4zm0-6h4v-4H4v4zm6 0h4v-4h-4v4zm6-10v4h4V4h-4zm-6 4h4V4h-4v4zm6 6h4v-4h-4v4zm0 6h4v-4h-4v4z"
+          /></svg
+      ></a>
+      <a href="scroll-progress.html" aria-label="Next: Scroll Progress" title="Next: Scroll Progress"
+        ><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+          <path fill="currentColor" d="M10 6 8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" /></svg
+      ></a>
+    </nav>
+    <script src="fill.js"></script>
+    <script>
+      const scroller = document.querySelector('.scroller');
+
+      // fill.js created the items, so give item 25 its id and color here.
+      const target = scroller.children[24];
+      target.id = 'item-25';
+      target.classList.replace('child', 'highlight');
+
+      // No `behavior: 'smooth'` needed in these calls: the scroller's
+      // `scroll-behavior: smooth` applies to them too.
+      document.querySelector('#top').onclick = () => scroller.scrollTo({ top: 0 });
+      document.querySelector('#bottom').onclick = () => scroller.scrollTo({ top: scroller.scrollHeight });
+      document.querySelector('#item').onclick = () => target.scrollIntoView({ block: 'center' });
+    </script>
+  </body>
+</html>

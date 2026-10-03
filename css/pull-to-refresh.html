@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>16. Pull to Refresh | Scrolling Insights</title>
+    <link rel="stylesheet" href="all.css" />
+    <style>
+      /*
+        Pull down at the top of a list to reload it. Think of an inbox.
+
+        Browsers only offer pull-to-refresh for the whole page, and it reloads the
+        page. For a list inside the page:
+        1. `overscroll-behavior-y: contain` turns off the browser's own
+           pull-to-refresh (and bounce) for the list.
+        2. Touch events track the pull, and refresh when it passes 64px.
+
+        Try it on a phone, or with touch emulation in your browser's dev tools.
+
+        In Flutter: RefreshIndicator, with an onRefresh callback. The one demo
+        where Flutter does far more for you.
+      */
+
+      .scroller {
+        height: 70vh;
+        overflow-y: auto;
+        /* Turn off the browser's own pull-to-refresh and bounce here. */
+        overscroll-behavior-y: contain;
+        position: relative;
+      }
+
+      .indicator {
+        height: 0;
+        overflow: hidden;
+        text-align: center;
+      }
+
+      .stack {
+        padding: 24px 0;
+      }
+    </style>
+  </head>
+  <body class="control">
+    <header>
+      <a class="back" href="index.html" aria-label="All demos" title="All demos"
+        ><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+          <path fill="currentColor" d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" /></svg
+      ></a>
+      <h1><span class="number">16</span><span class="title">Pull to Refresh</span></h1>
+    </header>
+    <main>
+      <p>overscroll-behavior-y: contain; + touch events (JS)</p>
+      <div class="scroller">
+        <div class="indicator">Pull to refresh</div>
+        <div class="stack" data-fill="14" data-label="Item "></div>
+      </div>
+    </main>
+    <!-- Floating buttons to the previous demo, all demos, and the next demo. -->
+    <nav class="demo-nav" aria-label="Demos">
+      <a href="infinite-list.html" aria-label="Previous: Infinite List" title="Previous: Infinite List"
+        ><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+          <path fill="currentColor" d="M15.41 7.41 14 6l-6 6 6 6 1.41-1.41L10.83 12z" /></svg
+      ></a>
+      <a href="index.html" aria-label="All demos" title="All demos"
+        ><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+          <path
+            fill="currentColor"
+            d="M4 8h4V4H4v4zm6 12h4v-4h-4v4zm-6 0h4v-4H4v4zm0-6h4v-4H4v4zm6 0h4v-4h-4v4zm6-10v4h4V4h-4zm-6 4h4V4h-4v4zm6 6h4v-4h-4v4zm0 6h4v-4h-4v4z"
+          /></svg
+      ></a>
+      <a
+        href="two-dimensional-scroll.html"
+        aria-label="Next: Two-Dimensional Scroll"
+        title="Next: Two-Dimensional Scroll"
+        ><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+          <path fill="currentColor" d="M10 6 8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" /></svg
+      ></a>
+    </nav>
+    <script src="fill.js"></script>
+    <script>
+      // On a touch screen, pulling down at the top of the list shows the
+      // indicator. Letting go after 64px refreshes the list.
+      const scroller = document.querySelector('.scroller');
+      const indicator = document.querySelector('.indicator');
+      const list = document.querySelector('.stack');
+
+      // A first, green item that counts the refreshes.
+      const first = document.createElement('div');
+      first.className = 'block highlight';
+      first.textContent = 'Refreshed 0 times';
+      list.prepend(first);
+
+      let refreshes = 0;
+      let startY = null; // Where the finger started, if at the top of the list.
+      let pulled = 0; // How far down it has pulled, in pixels.
+
+      // Passive listeners promise not to call preventDefault(), so the browser
+      // can keep scrolling smoothly while they run.
+
+      scroller.addEventListener(
+        'touchstart',
+        (event) => {
+          startY = scroller.scrollTop === 0 ? event.touches[0].clientY : null;
+        },
+        { passive: true }
+      );
+
+      scroller.addEventListener(
+        'touchmove',
+        (event) => {
+          if (startY === null) return;
+          // Only pulling down counts, and only up to 96px.
+          pulled = Math.max(0, Math.min(event.touches[0].clientY - startY, 96));
+          indicator.style.height = `${pulled}px`;
+          indicator.textContent = pulled >= 64 ? 'Release to refresh' : 'Pull to refresh';
+        },
+        { passive: true }
+      );
+
+      scroller.addEventListener('touchend', async () => {
+        if (pulled >= 64) {
+          indicator.textContent = 'Refreshing...';
+          // Pretend to fetch fresh data from a server.
+          await new Promise((resolve) => setTimeout(resolve, 1000));
+          refreshes++;
+          first.textContent = `Refreshed ${refreshes} ${refreshes === 1 ? 'time' : 'times'}`;
+        }
+        indicator.style.height = '0';
+        startY = null;
+        pulled = 0;
+      });
+    </script>
+  </body>
+</html>
