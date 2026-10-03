@@ -38,6 +38,11 @@
       .stack {
         padding: 24px 0;
       }
+
+      /* The green counter at the top of the list, as tall as the items. */
+      .counter {
+        min-height: 56px;
+      }
     </style>
   </head>
   <body class="control">
@@ -86,7 +91,7 @@
 
       // A first, green item that counts the refreshes.
       const first = document.createElement('div');
-      first.className = 'block highlight';
+      first.className = 'block highlight counter';
       first.textContent = 'Refreshed 0 times';
       list.prepend(first);
 
