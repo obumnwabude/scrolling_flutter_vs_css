@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>8. Collapsing Header | Scrolling Insights</title>
+    <link rel="stylesheet" href="all.css" />
+    <style>
+      /*
+        A tall header that shrinks to a bar as you scroll, then stays pinned. Think
+        of a profile page with a big cover photo.
+
+        Two features combine:
+        1. A sticky header with a negative `top` scrolls up until only its bottom
+           56px are visible, then sticks there.
+        2. A scroll-driven animation shrinks the title. `animation-timeline:
+           scroll()` runs a normal CSS animation by scroll position instead of
+           time.
+
+        Scroll-driven animations are new. Where a browser lacks them, the title
+        keeps one size and the header still collapses.
+
+        In Flutter: SliverAppBar with `pinned: true` and an `expandedHeight`.
+      */
+
+      .scroller {
+        height: 70vh;
+        overflow-y: auto;
+      }
+
+      /* 200px tall, but sticks once only its last 56px are visible:
+         top = 56px - 200px. */
+      .header {
+        align-items: flex-end;
+        height: 200px;
+        justify-content: flex-start;
+        padding: 16px;
+        position: sticky;
+        top: -144px;
+      }
+
+      /* Shrink the title over the first 144px of scrolling.
+         Browsers without scroll-driven animations show a fixed size. */
+      .header h3 {
+        animation: shrink linear both;
+        animation-range: 0 144px;
+        animation-timeline: scroll();
+        font-size: 1.25rem;
+        transform-origin: left bottom;
+      }
+
+      @keyframes shrink {
+        from {
+          transform: scale(1.5);
+        }
+        to {
+          transform: scale(1);
+        }
+      }
+
+      .stack {
+        padding: 16px;
+      }
+    </style>
+  </head>
+  <body class="layout">
+    <header>
+      <a class="back" href="index.html" aria-label="All demos" title="All demos"
+        ><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+          <path fill="currentColor" d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" /></svg
+      ></a>
+      <h1><span class="number">8</span><span class="title">Collapsing Header</span></h1>
+    </header>
+    <main>
+      <p>position: sticky; top: -144px; animation-timeline: scroll();</p>
+      <div class="scroller">
+        <div class="block highlight header"><h3>Header</h3></div>
+        <div class="stack" data-fill="20" data-label="Item "></div>
+      </div>
+    </main>
+    <!-- Floating buttons to the previous demo, all demos, and the next demo. -->
+    <nav class="demo-nav" aria-label="Demos">
+      <a
+        href="occupy-free-space-or-scroll.html"
+        aria-label="Previous: Occupy Free Space or Scroll"
+        title="Previous: Occupy Free Space or Scroll"
+        ><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+          <path fill="currentColor" d="M15.41 7.41 14 6l-6 6 6 6 1.41-1.41L10.83 12z" /></svg
+      ></a>
+      <a href="index.html" aria-label="All demos" title="All demos"
+        ><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+          <path
+            fill="currentColor"
+            d="M4 8h4V4H4v4zm6 12h4v-4h-4v4zm-6 0h4v-4H4v4zm0-6h4v-4H4v4zm6 0h4v-4h-4v4zm6-10v4h4V4h-4zm-6 4h4V4h-4v4zm6 6h4v-4h-4v4zm0 6h4v-4h-4v4z"
+          /></svg
+      ></a>
+      <a href="floating-header.html" aria-label="Next: Floating Header" title="Next: Floating Header"
+        ><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+          <path fill="currentColor" d="M10 6 8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" /></svg
+      ></a>
+    </nav>
+    <script src="fill.js"></script>
+  </body>
+</html>

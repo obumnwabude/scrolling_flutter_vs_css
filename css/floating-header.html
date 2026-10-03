@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>9. Floating Header | Scrolling Insights</title>
+    <link rel="stylesheet" href="all.css" />
+    <style>
+      /*
+        A header that hides when you scroll down and comes back as soon as you
+        scroll up, wherever you are. Think of the address bar in a mobile browser.
+
+        CSS can't tell which way you are scrolling, so a few lines of JavaScript
+        compare each scroll position with the last one, and toggle a class. CSS
+        does the rest: the header is sticky, and the class slides it out with a
+        transition.
+
+        In Flutter: SliverFloatingHeader, with no extra code.
+      */
+
+      .scroller {
+        height: 70vh;
+        overflow-y: auto;
+      }
+
+      /* Sticky, so it stays at the top while shown. */
+      .header {
+        height: 64px;
+        position: sticky;
+        top: 0;
+        transition: transform 300ms ease-in-out;
+      }
+
+      /* The script adds this class while scrolling down. It slides the
+         header up by its own height, out of view. */
+      .header.hidden {
+        transform: translateY(-100%);
+      }
+
+      .stack {
+        padding: 16px;
+      }
+    </style>
+  </head>
+  <body class="layout">
+    <header>
+      <a class="back" href="index.html" aria-label="All demos" title="All demos"
+        ><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+          <path fill="currentColor" d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" /></svg
+      ></a>
+      <h1><span class="number">9</span><span class="title">Floating Header</span></h1>
+    </header>
+    <main>
+      <p>position: sticky; + scroll direction (JS)</p>
+      <div class="scroller">
+        <div class="block highlight header">Header</div>
+        <div class="stack" data-fill="30" data-label="Item "></div>
+      </div>
+    </main>
+    <!-- Floating buttons to the previous demo, all demos, and the next demo. -->
+    <nav class="demo-nav" aria-label="Demos">
+      <a href="collapsing-header.html" aria-label="Previous: Collapsing Header" title="Previous: Collapsing Header"
+        ><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+          <path fill="currentColor" d="M15.41 7.41 14 6l-6 6 6 6 1.41-1.41L10.83 12z" /></svg
+      ></a>
+      <a href="index.html" aria-label="All demos" title="All demos"
+        ><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+          <path
+            fill="currentColor"
+            d="M4 8h4V4H4v4zm6 12h4v-4h-4v4zm-6 0h4v-4H4v4zm0-6h4v-4H4v4zm6 0h4v-4h-4v4zm6-10v4h4V4h-4zm-6 4h4V4h-4v4zm6 6h4v-4h-4v4zm0 6h4v-4h-4v4z"
+          /></svg
+      ></a>
+      <a href="scroll-snap.html" aria-label="Next: Scroll Snap" title="Next: Scroll Snap"
+        ><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+          <path fill="currentColor" d="M10 6 8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" /></svg
+      ></a>
+    </nav>
+    <script src="fill.js"></script>
+    <script>
+      // Hide the header when scrolling down. Show it again when scrolling up.
+      const scroller = document.querySelector('.scroller');
+      const header = document.querySelector('.header');
+      let lastTop = 0;
+      scroller.addEventListener('scroll', () => {
+        const top = scroller.scrollTop;
+        // Scrolling down means the offset grew since the last event. Keep the
+        // header while it's still in its own spot (the first 64px).
+        header.classList.toggle('hidden', top > lastTop && top > 64);
+        lastTop = top;
+      });
+    </script>
+  </body>
+</html>

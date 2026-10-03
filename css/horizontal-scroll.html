@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2. Horizontal Scroll | Scrolling Insights</title>
+    <link rel="stylesheet" href="all.css" />
+    <style>
+      /*
+        A row of cards that scrolls sideways.
+
+        `overflow-x: auto` lets a box scroll horizontally when its content is wider
+        than it. Here, a flex row of cards is wider than the screen.
+
+        In Flutter: `scrollDirection: Axis.horizontal` on a ListView.
+      */
+
+      .row {
+        display: flex;
+        gap: 16px;
+        height: 160px;
+        overflow-x: auto;
+        padding: 24px 0;
+      }
+
+      /* Keep each card's width instead of shrinking it to fit. */
+      .row > div {
+        flex: 0 0 160px;
+      }
+    </style>
+  </head>
+  <body class="basics">
+    <header>
+      <a class="back" href="index.html" aria-label="All demos" title="All demos"
+        ><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+          <path fill="currentColor" d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" /></svg
+      ></a>
+      <h1><span class="number">2</span><span class="title">Horizontal Scroll</span></h1>
+    </header>
+    <main>
+      <p>overflow-x: auto;</p>
+      <div class="row" data-fill="12"></div>
+    </main>
+    <!-- Floating buttons to the previous demo, all demos, and the next demo. -->
+    <nav class="demo-nav" aria-label="Demos">
+      <a href="how-to-scroll.html" aria-label="Previous: How to Scroll" title="Previous: How to Scroll"
+        ><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+          <path fill="currentColor" d="M15.41 7.41 14 6l-6 6 6 6 1.41-1.41L10.83 12z" /></svg
+      ></a>
+      <a href="index.html" aria-label="All demos" title="All demos"
+        ><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+          <path
+            fill="currentColor"
+            d="M4 8h4V4H4v4zm6 12h4v-4h-4v4zm-6 0h4v-4H4v4zm0-6h4v-4H4v4zm6 0h4v-4h-4v4zm6-10v4h4V4h-4zm-6 4h4V4h-4v4zm6 6h4v-4h-4v4zm0 6h4v-4h-4v4z"
+          /></svg
+      ></a>
+      <a href="prevent-scroll.html" aria-label="Next: Prevent Scroll" title="Next: Prevent Scroll"
+        ><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+          <path fill="currentColor" d="M10 6 8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" /></svg
+      ></a>
+    </nav>
+    <script src="fill.js"></script>
+  </body>
+</html>

@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>10. Scroll Snap | Scrolling Insights</title>
+    <link rel="stylesheet" href="all.css" />
+    <style>
+      /*
+        Scrolling that always comes to rest on a whole card, like a carousel.
+
+        `scroll-snap-type: x mandatory` on the container makes it snap
+        horizontally, every time. `scroll-snap-align: center` on each card says
+        which part of the card to snap to. Each card is 80% wide, so its neighbours
+        peek in from the sides.
+
+        In Flutter: a PageView with `PageController(viewportFraction: 0.8)`.
+      */
+
+      .carousel {
+        display: flex;
+        height: 240px;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+      }
+
+      /* Each card is 80% wide, so its neighbours peek in from the sides. */
+      .carousel > div {
+        border-inline: 8px solid white;
+        flex: 0 0 80%;
+        scroll-snap-align: center;
+      }
+
+      /* Let the first and last cards reach the center too. */
+      .carousel::before,
+      .carousel::after {
+        content: '';
+        flex: 0 0 10%;
+      }
+    </style>
+  </head>
+  <body class="feel">
+    <header>
+      <a class="back" href="index.html" aria-label="All demos" title="All demos"
+        ><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+          <path fill="currentColor" d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" /></svg
+      ></a>
+      <h1><span class="number">10</span><span class="title">Scroll Snap</span></h1>
+    </header>
+    <main>
+      <p>scroll-snap-type: x mandatory;</p>
+      <div class="carousel" data-fill="8"></div>
+    </main>
+    <!-- Floating buttons to the previous demo, all demos, and the next demo. -->
+    <nav class="demo-nav" aria-label="Demos">
+      <a href="floating-header.html" aria-label="Previous: Floating Header" title="Previous: Floating Header"
+        ><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+          <path fill="currentColor" d="M15.41 7.41 14 6l-6 6 6 6 1.41-1.41L10.83 12z" /></svg
+      ></a>
+      <a href="index.html" aria-label="All demos" title="All demos"
+        ><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+          <path
+            fill="currentColor"
+            d="M4 8h4V4H4v4zm6 12h4v-4h-4v4zm-6 0h4v-4H4v4zm0-6h4v-4H4v4zm6 0h4v-4h-4v4zm6-10v4h4V4h-4zm-6 4h4V4h-4v4zm6 6h4v-4h-4v4zm0 6h4v-4h-4v4z"
+          /></svg
+      ></a>
+      <a href="overscroll-behavior.html" aria-label="Next: Overscroll Behavior" title="Next: Overscroll Behavior"
+        ><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+          <path fill="currentColor" d="M10 6 8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" /></svg
+      ></a>
+    </nav>
+    <script src="fill.js"></script>
+    <script>
+      // fill.js makes red items. Recolor them blue, to match the Flutter demo.
+      for (const card of document.querySelectorAll('.carousel > div')) {
+        card.classList.replace('child', 'container');
+      }
+    </script>
+  </body>
+</html>

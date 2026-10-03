@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Scrolling Insights</title>
+    <link rel="stylesheet" href="all.css" />
+    <style>
+      /*
+        The list of every demo, numbered and grouped like the Flutter app's
+        home screen. Each group has its own outline color (see all.css).
+      */
+
+      header {
+        justify-content: center;
+      }
+
+      main {
+        max-width: 960px;
+      }
+
+      main > p {
+        font-family: inherit;
+        text-align: center;
+      }
+
+      section {
+        margin-bottom: 2rem;
+      }
+
+      /* A responsive grid: as many 220px-wide columns as fit. */
+      ol {
+        display: grid;
+        gap: 12px;
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        list-style: none;
+      }
+
+      ol a {
+        align-items: center;
+        border: 2px solid var(--group);
+        border-radius: 12px;
+        color: unset;
+        display: flex;
+        gap: 12px;
+        height: 100%;
+        padding: 12px 16px;
+        text-decoration: none;
+        transition:
+          background-color 150ms,
+          box-shadow 150ms;
+      }
+
+      ol a:hover,
+      ol a:focus-visible {
+        background-color: var(--group-tint);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+      }
+    </style>
+  </head>
+  <body>
+    <header><h1>Scrolling Insights</h1></header>
+    <main>
+      <p>The same 17 scrolling behaviors, built in CSS here and in Flutter in the app.</p>
+      <section class="basics">
+        <h2>Basics</h2>
+        <ol>
+          <li>
+            <a href="how-to-scroll.html"><span class="number">1</span><span class="title">How to Scroll</span></a>
+          </li>
+          <li>
+            <a href="horizontal-scroll.html"
+              ><span class="number">2</span><span class="title">Horizontal Scroll</span></a
+            >
+          </li>
+          <li>
+            <a href="prevent-scroll.html"><span class="number">3</span><span class="title">Prevent Scroll</span></a>
+          </li>
+          <li>
+            <a href="nested-scrolling.html"><span class="number">4</span><span class="title">Nested Scrolling</span></a>
+          </li>
+        </ol>
+      </section>
+      <section class="layout">
+        <h2>Headers & Layout</h2>
+        <ol>
+          <li>
+            <a href="pin-item-on-scroll.html"
+              ><span class="number">5</span><span class="title">Pin Item on Scroll</span></a
+            >
+          </li>
+          <li>
+            <a href="sticky-section-headers.html"
+              ><span class="number">6</span><span class="title">Sticky Section Headers</span></a
+            >
+          </li>
+          <li>
+            <a href="occupy-free-space-or-scroll.html"
+              ><span class="number">7</span><span class="title">Occupy Free Space or Scroll</span></a
+            >
+          </li>
+          <li>
+            <a href="collapsing-header.html"
+              ><span class="number">8</span><span class="title">Collapsing Header</span></a
+            >
+          </li>
+          <li>
+            <a href="floating-header.html"><span class="number">9</span><span class="title">Floating Header</span></a>
+          </li>
+        </ol>
+      </section>
+      <section class="feel">
+        <h2>Feel</h2>
+        <ol>
+          <li>
+            <a href="scroll-snap.html"><span class="number">10</span><span class="title">Scroll Snap</span></a>
+          </li>
+          <li>
+            <a href="overscroll-behavior.html"
+              ><span class="number">11</span><span class="title">Overscroll Behavior</span></a
+            >
+          </li>
+          <li>
+            <a href="custom-scrollbar.html"
+              ><span class="number">12</span><span class="title">Custom Scrollbar</span></a
+            >
+          </li>
+        </ol>
+      </section>
+      <section class="control">
+        <h2>Control & Data</h2>
+        <ol>
+          <li>
+            <a href="scroll-programmatically.html"
+              ><span class="number">13</span><span class="title">Scroll Programmatically</span></a
+            >
+          </li>
+          <li>
+            <a href="scroll-progress.html"><span class="number">14</span><span class="title">Scroll Progress</span></a>
+          </li>
+          <li>
+            <a href="infinite-list.html"><span class="number">15</span><span class="title">Infinite List</span></a>
+          </li>
+          <li>
+            <a href="pull-to-refresh.html"><span class="number">16</span><span class="title">Pull to Refresh</span></a>
+          </li>
+          <li>
+            <a href="two-dimensional-scroll.html"
+              ><span class="number">17</span><span class="title">Two-Dimensional Scroll</span></a
+            >
+          </li>
+        </ol>
+      </section>
+    </main>
+  </body>
+</html>

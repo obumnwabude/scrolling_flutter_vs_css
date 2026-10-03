@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>15. Infinite List | Scrolling Insights</title>
+    <link rel="stylesheet" href="all.css" />
+    <style>
+      /*
+        A long list that loads more items as you near the end. Think of a feed.
+
+        - `content-visibility: auto` lets the browser skip the layout and painting
+          of items far off screen. `contain-intrinsic-size` tells it how tall to
+          assume they are, so the scrollbar stays steady.
+        - An IntersectionObserver watches the "Loading..." line at the end, and
+          fetches the next page when it comes within 300px of the screen.
+
+        In Flutter: ListView.builder, which only builds the items near the screen,
+        and a ScrollController listener that loads more near the end.
+      */
+
+      /* Skip rendering items that are off screen.
+         Each one keeps a 56px placeholder until it comes into view. */
+      .stack > .child {
+        contain-intrinsic-size: auto 56px;
+        content-visibility: auto;
+      }
+
+      .status {
+        padding: 16px;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body class="control">
+    <header>
+      <a class="back" href="index.html" aria-label="All demos" title="All demos"
+        ><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+          <path fill="currentColor" d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" /></svg
+      ></a>
+      <h1><span class="number">15</span><span class="title">Infinite List</span></h1>
+    </header>
+    <main>
+      <p>content-visibility: auto; + IntersectionObserver</p>
+      <div class="stack" data-fill="20" data-label="Item "></div>
+      <p class="status">Loading...</p>
+    </main>
+    <!-- Floating buttons to the previous demo, all demos, and the next demo. -->
+    <nav class="demo-nav" aria-label="Demos">
+      <a href="scroll-progress.html" aria-label="Previous: Scroll Progress" title="Previous: Scroll Progress"
+        ><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+          <path fill="currentColor" d="M15.41 7.41 14 6l-6 6 6 6 1.41-1.41L10.83 12z" /></svg
+      ></a>
+      <a href="index.html" aria-label="All demos" title="All demos"
+        ><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+          <path
+            fill="currentColor"
+            d="M4 8h4V4H4v4zm6 12h4v-4h-4v4zm-6 0h4v-4H4v4zm0-6h4v-4H4v4zm6 0h4v-4h-4v4zm6-10v4h4V4h-4zm-6 4h4V4h-4v4zm6 6h4v-4h-4v4zm0 6h4v-4h-4v4z"
+          /></svg
+      ></a>
+      <a href="pull-to-refresh.html" aria-label="Next: Pull to Refresh" title="Next: Pull to Refresh"
+        ><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+          <path fill="currentColor" d="M10 6 8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" /></svg
+      ></a>
+    </nav>
+    <script src="fill.js"></script>
+    <script>
+      const pageSize = 20;
+      const maxItems = 200; // Where our pretend server runs out of items.
+      const list = document.querySelector('.stack');
+      const status = document.querySelector('.status');
+      let loading = false; // Stops one scroll from loading many pages.
+
+      // Load the next page when the status line comes within 300px of the screen.
+      const observer = new IntersectionObserver(
+        async ([entry]) => {
+          if (!entry.isIntersecting || loading) return;
+          loading = true;
+          // Pretend to fetch the next page from a server.
+          await new Promise((resolve) => setTimeout(resolve, 800));
+          const count = list.children.length;
+          for (let i = count + 1; i <= count + pageSize; i++) {
+            const item = document.createElement('div');
+            item.className = 'block child';
+            item.textContent = `Item ${i}`;
+            list.append(item);
+          }
+          loading = false;
+          // Out of items: stop watching, and say so.
+          if (list.children.length >= maxItems) {
+            observer.disconnect();
+            status.textContent = 'No more items';
+          }
+        },
+        // Grow the screen's edges by 300px, so loading starts before the user
+        // reaches the end. Like extentAfter < 300 in the Flutter demo.
+        { rootMargin: '300px' }
+      );
+      observer.observe(status);
+    </script>
+  </body>
+</html>
